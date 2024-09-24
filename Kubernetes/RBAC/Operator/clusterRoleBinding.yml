@@ -1,0 +1,12 @@
+.dapiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: diskpressure-operator-binding
+subjects:
+  - kind: ServiceAccount
+    name: diskpressure-operator
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: diskpressure-operator
+  apiGroup: rbac.authorization.k8s.io
