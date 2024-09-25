@@ -1,1 +1,1 @@
-{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/asael/Projects/devops/vagrant/ubuntu","disabled":false,"__vagrantfile":true}}}
+{"virtualbox":{"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/asael/Projects/DevOps/vagrant/ubuntu","disabled":false,"__vagrantfile":true}}}

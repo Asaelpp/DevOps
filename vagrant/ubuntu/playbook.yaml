@@ -1,0 +1,57 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt package manager
+      apt:
+        update_cache: yes
+
+    - name: Install Apache, MySQL, PHP and Dependencies
+      apt:
+        name:
+          - apache2
+          - mysql-server
+          - php
+          - libapache2-mod-php
+          - php-mysql
+          - ghostscript
+          - php-bcmath
+          - php-curl
+          - php-imagick
+          - php-intl
+          - php-json
+          - php-mbstring
+          - php-xml
+          - php-zip
+        state: present
+
+    - name: Enable Apache
+      service:
+        name: apache2
+        state: started
+        enabled: yes
+
+    - name: Start and Enable MySQL
+      service:
+        name: mysql
+        state: started
+        enabled: yes
+
+    - name: Download Wordpress
+      get_url:
+        url: https://wordpress.org/latest.tar.gz
+        dest: /tmp/wordpress.tar.gz
+
+    - name: Creating directory srv/www
+      command: sudo mkdir -p /srv/www
+
+    - name: Giving permission
+      command: "sudo chown www-data: /srv/www"
+
+    - name: Exctract Wordpress
+      unarchive:
+        src: /tmp/wordpress.tar.gz
+        dest: /srv/www
+        remote_src: yes
+        creates: /srv/www/wordpress
