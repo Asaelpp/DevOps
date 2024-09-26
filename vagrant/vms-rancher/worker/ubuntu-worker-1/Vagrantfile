@@ -1,0 +1,34 @@
+ #-*- mode: ruby -*-
+ #vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  # Definição da box
+  config.vm.box = "ubuntu/bionic64"
+
+  # Configurando a rede pública com IP fixo
+  config.vm.network "public_network", ip: "192.168.55.17"
+
+  config.vm.network "public_network"
+
+  # Definindo o hostname da VM
+  config.vm.hostname = "wordpress-vm"
+
+  # Configurando o provisionamento Ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "playbook.yaml"  # Nome do playbook Ansible
+  end
+
+  # Configurando memória e CPU para a VM
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "1024"
+    vb.cpus = 1
+  end
+
+  # Porta de redirecionamento para acessar o Apache (opcional, caso prefira acessar via IP)
+  # config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  # Sincronizando pastas locais para a VM (opcional)
+  # config.vm.synced_folder "./wordpress", "/srv/www/wordpress"
+
+end
+
